@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Background Video</title>
+  <link rel="stylesheet" href="styles.css">
+  <link href="https://fonts.googleapis.com/css?family=Audiowide&display=swap" type="text/css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.19/dist/sweetalert2.all.min.js"></script>
+  <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+  <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+</head>
+
+<body>
+  <div class="video-container">
+    <video id="myVideo" loop>
+      <source src="video1.mp4" type="video/mp4">
+    </video>
+
+    <div id="content">
+      <font color="white" size="5" face="audiowide">Nopin Dev</font>
+      <br>
+      <marquee behavior="alternate" scrollamount="5" style="border:1px solid;" width="300px">
+        <font face="courier New" color="white" size="3">----------:[ ALL FRIEND'S - ALL TEAM - ALL FAMILY - AND YOU!! ]:----------</font>
+      </marquee>
+      <br>
+      <font color="white" size="4" face="courier New">
+        <a href="dashboard.html" class="docs">click to open</a>
+      </font>
+    </div>
+
+    <div id="bgv">
+      <div class="set-btn">
+        <button id="open" onclick="toggleMenu('open')">
+          <ion-icon name="reorder-three-outline"></ion-icon>
+        </button>
+      </div>
+      <div id="menu">
+        <div class="cls">
+          <label><input type="radio" name="video" value="video/video1.mp4" data-time="3000"></label>
+          <label><input type="radio" name="video" value="video/video2.mp4" data-time="1000"></label>
+          <label><input type="radio" name="video" value="video/video3.mp4" data-time="3000"></label>
+          <button onclick="toggleMenu('close')" class="close">
+            <ion-icon name="close-outline"></ion-icon>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const vid = document.getElementById("myVideo");
+
+    async function mulai() {
+      await Swal.fire('welcome');
+      setTimeout(showDiv, 500);
+      vid.play();
+      setTimeout(() => document.getElementById("content").style.opacity = 1, 5000);
+    }
+    mulai();
+
+    function showDiv() {
+      document.getElementById("bgv").style.background = 'rgba(0, 0, 0, 0.5)';
+    }
+
+    function toggleMenu(action) {
+      const menu = document.getElementById("menu");
+      const open = document.getElementById("open");
+      menu.style.display = (action === 'open') ? 'block' : 'none';
+      open.style.display = (action === 'open') ? 'none' : 'block';
+    }
+
+    const radios = document.querySelectorAll('input[name="video"]');
+    const videoDisplay = document.getElementById('myVideo');
+
+    function saveVideoChoice(value, time) {
+      localStorage.setItem('selectedVideo', value);
+      localStorage.setItem('selectedTime', time);
+    }
+
+    function loadVideoChoice() {
+      const savedVideo = localStorage.getItem('selectedVideo');
+      const savedTime = localStorage.getItem('selectedTime') || 5000;
+
+      if (savedVideo) {
+        videoDisplay.querySelector('source').src = savedVideo;
+        videoDisplay.load();
+        document.querySelector(`input[value="${savedVideo}"]`).checked = true;
+        setTimeout(() => document.getElementById("content").style.opacity = 1, savedTime);
+      }
+    }
+
+    radios.forEach(radio => {
+      radio.addEventListener('change', function() {
+        const selectedVideo = this.value;
+        const selectedTime = this.getAttribute('data-time') || 5000;
+
+        videoDisplay.querySelector('source').src = selectedVideo;
+        videoDisplay.load();
+        videoDisplay.play();
+        saveVideoChoice(selectedVideo, selectedTime);
+        setTimeout(() => document.getElementById("content").style.opacity = 1, selectedTime);
+      });
+    });
+
+    loadVideoChoice();
+  </script>
+</body>
+
+</html>
