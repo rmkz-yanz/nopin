@@ -1,0 +1,19 @@
+.result {
+    display: flex;
+    flex-direction: column;
+    margin-top: 20px;
+    align-items: center;
+    text-align: center;
+}
+
+#avatar-tik {
+    width: 30%;
+    border-radius: 50%;
+    margin-bottom: 10px;
+}
+
+.video-tik {
+    width: 50%;
+    margin-top: 10px;
+    border-radius: 10px;
+}
