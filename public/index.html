@@ -81,7 +81,7 @@
 
     function loadVideoChoice() {
       const savedVideo = localStorage.getItem('selectedVideo');
-      const savedTime = localStorage.getItem('selectedTime') || 5000;
+      const savedTime = localStorage.getItem('selectedTime') || 3000;
 
       if (savedVideo) {
         videoDisplay.querySelector('source').src = savedVideo;
