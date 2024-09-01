@@ -94,7 +94,7 @@
     radios.forEach(radio => {
       radio.addEventListener('change', function() {
         const selectedVideo = this.value;
-        const selectedTime = this.getAttribute('data-time') || 5000;
+        const selectedTime = this.getAttribute('data-time') || 3000;
 
         videoDisplay.querySelector('source').src = selectedVideo;
         videoDisplay.load();
